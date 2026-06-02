@@ -1,0 +1,84 @@
+.retour {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #c9a227;
+  text-decoration: none;
+  font-weight: 600;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+h1 {
+  color: #1a1a2e;
+}
+
+.vider {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background: #a93226;
+  }
+}
+
+.deck {
+  list-style: none;
+  padding: 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+
+    img {
+      border-radius: 4px;
+    }
+
+    .nom {
+      flex: 1;
+      color: #1a1a2e;
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover {
+        color: #c9a227;
+      }
+    }
+
+    .qte {
+      font-weight: 600;
+      color: #c9a227;
+      min-width: 2rem;
+    }
+
+    button {
+      padding: 0.25rem 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+
+      &:not(:disabled):hover {
+        background: #f5f5f5;
+      }
+    }
+  }
+}

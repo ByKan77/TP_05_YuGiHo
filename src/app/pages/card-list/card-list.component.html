@@ -1,0 +1,48 @@
+<header>
+  <h1>🟡 Yu-Gi-Oh Explorer</h1>
+  <a routerLink="/deck">🗂️ Mon deck ({{ collection.total() }})</a>
+</header>
+
+<form class="filtres" (submit)="$event.preventDefault(); rechercher()">
+  <input [(ngModel)]="recherche" name="q" placeholder="Nom de la carte…" />
+
+  <select (change)="filtrerType($any($event.target).value)">
+    <option value="">— Type —</option>
+    @for (t of filters.types; track t) {
+      <option [value]="t">{{ t }}</option>
+    }
+  </select>
+
+  <select (change)="filtrerAttribut($any($event.target).value)">
+    <option value="">— Attribut —</option>
+    @for (a of filters.attributes; track a) {
+      <option [value]="a">{{ a }}</option>
+    }
+  </select>
+
+  <button type="submit">Rechercher</button>
+  <button type="button" (click)="reinitialiser()">Réinitialiser</button>
+  <button type="button" (click)="carteAleatoire()">🎲 Carte aléatoire</button>
+</form>
+
+@if (loading()) {
+  <p>⏳ Chargement…</p>
+} @else if (error()) {
+  <p class="error">❌ {{ error() }}</p>
+} @else {
+  <div class="grille">
+    @for (c of cards(); track c.id) {
+      <article class="carte">
+        <a [routerLink]="['/carte', c.id]">
+          <img [src]="c.card_images[0].image_url_small" [alt]="c.name" />
+        </a>
+        <h3>{{ c.name }}</h3>
+        <button (click)="collection.ajouter(c)" [disabled]="collection.estDansDeck(c.id)">
+          {{ collection.estDansDeck(c.id) ? '✓ Dans le deck' : '+ Ajouter' }}
+        </button>
+      </article>
+    } @empty {
+      <p>Aucune carte trouvée.</p>
+    }
+  </div>
+}
